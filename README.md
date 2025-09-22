@@ -50,7 +50,12 @@ BankLLMAgent/
    git clone <repository-url>
    cd BankLLMAgent
    ```
-
+1.5 **Make virtual enviroment:**
+   ```bash
+   python -m venv .venv
+   source .venv/bin/activate
+   ```
+   
 2. **Install dependencies:**
    ```bash
    pip install -r requirements.txt
