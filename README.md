@@ -40,7 +40,7 @@ BankLLMAgent/
 
 ### Prerequisites
 
-- Python 3.8+
+- Python 3.8+ AND Python < 3.13
 - Groq API key (for AI chatbot functionality)
 
 ### Installation
