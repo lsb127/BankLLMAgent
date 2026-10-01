@@ -281,6 +281,13 @@ class DatabaseManager:
         
         try:
             cursor.execute(query)
+
+            if cursor.description is None:
+                conn.commit()
+                rows_affected = cursor.rowcount
+                conn.close()
+                return [{"rows_affected": rows_affected}]
+
             results = cursor.fetchall()
             columns = [description[0] for description in cursor.description]
             

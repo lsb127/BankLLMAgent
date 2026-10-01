@@ -40,7 +40,7 @@ BankLLMAgent/
 
 ### Prerequisites
 
-- Python 3.8+ AND Python < 3.13
+- Python 3.11-3.13 (tested with Python 3.12 and 3.13)
 - Groq API key (for AI chatbot functionality)
 
 ### Installation
@@ -70,6 +70,8 @@ BankLLMAgent/
    - Web Interface: http://localhost:8501
    - API Documentation: http://localhost:8000/docs
 
+The **Vulnerability Tests** tab contains intentionally unsafe prompt-injection and jailbreak exercises.
+
 ## 🔧 Configuration
 
 ### Groq API Setup
@@ -95,4 +97,3 @@ The system comes pre-populated with sample users:
 
 ### Related Courses
 - CMPT782 - Cybersecurity Lab 1
-

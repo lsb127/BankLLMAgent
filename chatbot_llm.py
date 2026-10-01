@@ -41,13 +41,13 @@ Respond in JSON format with 'action', 'parameters', and 'response' fields.
         
         try:
             completion = self.client.chat.completions.create(
-                model="llama-3.3-70b-versatile",
+                model="openai/gpt-oss-120b",
                 messages=[
                     {"role": "system", "content": enhanced_prompt},
                     {"role": "user", "content": message}
                 ],
                 temperature=0.7,
-                max_tokens=1000
+                max_tokens=2000
             )
             
             response_text = completion.choices[0].message.content
@@ -108,7 +108,7 @@ Respond in JSON format with 'action', 'parameters', and 'response' fields.
             elif action == "transfer_money":
                 from_acc = parameters.get("from_account", user_account)
                 to_acc = parameters.get("to_account")
-                amount = parameters.get("amount", 0)
+                amount = float(parameters.get("amount", 0))
                 
                 if to_acc and amount > 0:
                     transfer_data = {
@@ -153,7 +153,7 @@ Respond in JSON format with 'action', 'parameters', and 'response' fields.
             
             elif action == "withdraw_money":
                 account = parameters.get("account_number", user_account)
-                amount = parameters.get("amount", 0)
+                amount = float(parameters.get("amount", 0))
                 
                 if amount > 0:
                     withdrawal_data = {
@@ -247,13 +247,13 @@ User account: {user_account}
         
         try:
             completion = self.client.chat.completions.create(
-                model="mixtral-8x7b-32768",
+                model="openai/gpt-oss-120b",
                 messages=[
                     {"role": "system", "content": self.system_prompt},
                     {"role": "user", "content": malicious_prompt}
                 ],
                 temperature=0.7,
-                max_tokens=1000
+                max_tokens=2000
             )
             
             response_text = completion.choices[0].message.content

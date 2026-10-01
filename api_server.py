@@ -135,11 +135,17 @@ async def chat_endpoint(chat_data: ChatMessage):
         amount = 0
         to_account = ""
         
-        for word in words:
-            if word.replace(".", "").isdigit():
-                amount = float(word)
-            elif word.isdigit() and len(word) >= 4 and word != account:
-                to_account = word
+        for i, word in enumerate(words):
+            account_candidate = word.strip(".,")
+            amount_candidate = word.replace("$", "").replace(",", "")
+
+            if i > 0 and words[i - 1] == "to" and account_candidate.isdigit() and len(account_candidate) >= 4:
+                to_account = account_candidate
+            elif amount == 0:
+                try:
+                    amount = float(amount_candidate)
+                except ValueError:
+                    pass
         
         if amount > 0 and to_account:
             success = db.create_transaction(account, to_account, amount, "transfer", 

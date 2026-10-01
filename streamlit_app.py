@@ -208,6 +208,32 @@ def main_app():
             response = call_api("GET", f"/api/transactions/{view_account}")
             if response:
                 st.json(response)
+
+    with tab4:
+        st.subheader("Prompt Injection and Jailbreak Tests")
+        st.warning("These exercises intentionally send unsafe instructions directly to the model.")
+
+        if st.session_state.chatbot is None:
+            st.info("Initialize the chatbot with a Groq API key in the AI Chatbot tab first.")
+        else:
+            injection = st.text_area("Injection prompt")
+            injection_message = st.text_input("Original user message", key="injection_message")
+
+            if st.button("Run Prompt Injection") and injection:
+                result = st.session_state.chatbot.inject_prompt(
+                    injection,
+                    injection_message,
+                    st.session_state.user_data['account_number'],
+                    st.session_state.user_data
+                )
+                st.json(result)
+
+            if st.button("Run Jailbreak Simulation"):
+                result = st.session_state.chatbot.simulate_jailbreak(
+                    injection_message,
+                    st.session_state.user_data['account_number']
+                )
+                st.json(result)
     
     
 
